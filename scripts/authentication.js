@@ -1,5 +1,9 @@
 function init() {
-    document.addEventListener("deviceready", deviceReady, true);
+    //document.addEventListener("deviceready", deviceReady, true);
+    $(document).ready(function () {
+        alert("device ready");
+        $("#loginForm").on("submit", handleLogin);
+    });
     delete init;
 }
 
@@ -34,7 +38,7 @@ function handleLogin() {
 //            $("#submitButton").removeAttr("disabled");
         //        }, "json");
         console.log("page 2");
-        $.mobile.changePage("main.html");
+        $.mobile.changePage("#mainPage");
     } else {
         console.log("go on back");
         navigator.notification.alert("You must enter a username and password", function () { });

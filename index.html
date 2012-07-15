@@ -49,11 +49,45 @@
                         <label for="password">Password:</label>
                         <input type="password" name="password" id="password" value="" placeholder="Password" onclick="return password_onclick()" />
                     </div>
-                    <input type="submit" value="Login" id="submitButton"/>
+                    <input type="submit" value="Login" id="submitButton" \/>
                 </form>
             </div>
             <div data-role="footer">
                 <h4>Company Name Here</h4>
+            </div>
+        </div>
+
+        <div id="mainPage" data-role="page">
+            <div data-role="header">
+                <h1>Home</h1>
+                <a href="#loginPage" data-mini="true" class="ui-btn-right">Logout</a>
+            </div>
+            <div data-role="content">
+                <a data-role="button" href="#popupPage" data-rel="dialog" data-transition="pop">Open Dialog </a>
+                <a data-role="button" href="#page2">Page Switch</a>
+            </div>
+            <div data-role="footer">
+                <h4>Footer</h4>
+            </div>
+        </div>
+
+        <div id="page2" data-role="page">
+            <div data-role="header">
+                <h1>Page 2</h1>
+                <a href="#loginPage" data-mini="true" class="ui-btn-right">Logout</a>
+            </div>
+            <div data-role="content">
+                <h1>Now I am starting to understand</h1>
+                <a data-role="button" href="#mainPage">Page Switch</a>
+            </div>
+        </div>
+
+        <div id="popupPage" data-role="page">
+            <div data-role="header">
+                <h1>Popup Screen</h1>
+            </div>
+            <div data-role="content">
+                <h1>Whatever</h1>
             </div>
         </div>
    </body>
