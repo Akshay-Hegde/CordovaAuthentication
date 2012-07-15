@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.tobygrover.cordova.authenticate.test1"
+	version 	= "1.0.0">
+
+	<name>Cordova Authentication</name>
+
+	<description>
+		Trying to come up with authentication scheme
+	</description>
+
+	<author email="tobyandrewgrover@yahoo.com">Toby Grover</author>
+
+	<icon src="icon.png" gap:role="default" />
+
+	<!--feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/network"/-->
+
+	<preference name="orientation" value="portrait" />
+</widget>
