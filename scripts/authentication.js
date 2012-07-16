@@ -26,25 +26,33 @@ function handleLogin() {
     var p = $("#password", form).val();
     console.log("Entering the function: handleLogin, information=" + u + "/" + p);
     if (u != '' && p != '') {
-//        $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", { username: u, password: p }, function (res) {
-//            if (res == true) {
-//                //store
-//                window.localStorage["username"] = u;
-//                window.localStorage["password"] = p;
-//                $.mobile.changePage("home.html");
-//            } else {
-//                navigator.notification.alert("Your login failed", function () { });
-//            }
-//            $("#submitButton").removeAttr("disabled");
-        //        }, "json");
-        console.log("page 2");
-        $.mobile.changePage("#mainPage");
+        console.log("about ready to post to CordovaLogOn");
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:55297/Account/CordovaLogOn",
+            crossDomain: true,
+            data: { username: u, password: p },
+            dataType: "jsonp",
+            jsonpCallback: "loginSuccess",
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(errorThrown + textStatus + jqXHR);
+                console.log("login failure");
+                navigator.notification.alert("Your login failed", function () { });
+            }
+         });
     } else {
         console.log("go on back");
         navigator.notification.alert("You must enter a username and password", function () { });
     }
     $("#submitButton").removeAttr("disabled");
     return false;
+}
+
+function loginSuccess(data) {
+    console.log("JSON from backend => success=" + data.success);
+    window.localStorage["username"] = data.username;
+    window.localStorage["password"] = data.password;
+    $.mobile.changePage("#mainPage");
 }
 
 function deviceReady() {
