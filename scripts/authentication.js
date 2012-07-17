@@ -29,7 +29,7 @@ function handleLogin() {
         console.log("about ready to post to CordovaLogOn");
         $.ajax({
             type: "POST",
-            url: "http://localhost:55297/Account/CordovaLogOn",
+            url: "http://cnu1480tnh.ohlogistics.com:65495/Account/CordovaLogOn",
             crossDomain: true,
             data: { username: u, password: p },
             dataType: "jsonp",
