@@ -28,15 +28,19 @@ function handleLogin() {
     if (u != '' && p != '') {
         console.log("about ready to post to CordovaLogOn");
         $.ajax({
-            type: "POST",
-            url: "http://cnu1480tnh.ohlogistics.com:65495/Account/CordovaLogOn",
+            type: "GET",
+            url: "http://cnu1480tnh.ohlogistics.com/CarrierVisibility/Account/CordovaLogOn",
             crossDomain: true,
+            timeout : 10000,
             data: { username: u, password: p },
             dataType: "jsonp",
             jsonpCallback: "loginSuccess",
             error: function (jqXHR, textStatus, errorThrown) {
                 //alert(errorThrown + textStatus + jqXHR);
                 console.log("login failure");
+                console.log(jqXHR.status);
+                console.log(textStatus);
+                console.log(errorThrown);
                 navigator.notification.alert("Your login failed", function () { });
             }
          });
