@@ -38,7 +38,7 @@ function handleLogin() {
         console.log("about ready to post to CordovaLogOn");
         $.ajax({
             type: "GET",
-            url: "http://cnu1480tnh.ohlogistics.com/CarrierVisibility/Account/CordovaLogOn",
+            url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOn",
             crossDomain: true,
             timeout: 10000,
             data: { username: u, password: p },
