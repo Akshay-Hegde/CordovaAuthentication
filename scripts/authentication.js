@@ -3,6 +3,8 @@ function init() {
     $(document).ready(function () {
         alert("device ready");
         $("#loginForm").on("submit", handleLogin);
+        $.support.cors = true;
+        $.mobile.allowCrossDomainPages = true;
     });
     delete init;
 }
