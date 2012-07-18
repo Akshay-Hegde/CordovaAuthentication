@@ -1,10 +1,17 @@
+$(document).bind("mobileinit", function () {
+    $.extend($.mobile, {
+        allowCrossDomainPages: true
+    });
+
+    $.extend($.support, {
+        cors: true
+    });
+});
+
 function init() {
     //document.addEventListener("deviceready", deviceReady, true);
     $(document).ready(function () {
-        alert("device ready");
         $("#loginForm").on("submit", handleLogin);
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
     });
     delete init;
 }
@@ -33,16 +40,13 @@ function handleLogin() {
             type: "GET",
             url: "http://cnu1480tnh.ohlogistics.com/CarrierVisibility/Account/CordovaLogOn",
             crossDomain: true,
-            timeout : 10000,
+            timeout: 10000,
             data: { username: u, password: p },
             dataType: "jsonp",
             jsonpCallback: "loginSuccess",
             error: function (jqXHR, textStatus, errorThrown) {
                 //alert(errorThrown + textStatus + jqXHR);
                 console.log("login failure");
-                console.log(jqXHR.status);
-                console.log(textStatus);
-                console.log(errorThrown);
                 navigator.notification.alert("Your login failed", function () { });
             }
          });
