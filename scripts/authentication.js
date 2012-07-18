@@ -46,7 +46,7 @@ function handleLogin() {
             jsonpCallback: "loginSuccess",
             error: function (jqXHR, textStatus, errorThrown) {
                 //alert(errorThrown + textStatus + jqXHR);
-                console.log("login failure");
+                console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
                 navigator.notification.alert("Your login failed", function () { });
             }
          });
