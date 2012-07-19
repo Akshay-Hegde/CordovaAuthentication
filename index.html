@@ -68,7 +68,8 @@
                 <a data-role="button" href="#popupPage" data-rel="dialog" data-transition="pop">Open Dialog </a>
                 <a data-role="button" href="#page2">Page Switch</a>
                 <a data-role="button" id="testLoadsButton">Test Authentication</a>
-                <div id="testGetLoads" />
+                <a data-role="button" href="#userNotAuthorizedPopup" data-rel="popup" data-transition="pop">Test Popup</a>
+                <div id="testGetLoads"></div>
             </div>
             <div data-role="footer">
                 <h4>Footer</h4>
@@ -93,6 +94,10 @@
             <div data-role="content">
                 <h1>Whatever</h1>
             </div>
+        </div>
+
+        <div data-role="popup" id="userNotAuthorizedPopup">
+	        Thou art not validated
         </div>
    </body>
 </html>

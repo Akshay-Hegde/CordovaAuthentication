@@ -1,5 +1,4 @@
 $(document).bind("mobileinit", function () {
-    alert("setting permissions");
     $.mobile.allowCrossDomainPages = true;
     $.support.cors = true;
 });
@@ -16,5 +15,7 @@ function init() {
         //main page
         var mainPage = $("#mainPage");
         mainPage.find("#testLoadsButton").click(loadsGetTestLoads);
+
+        authCheckPreAuth();
     });
 }

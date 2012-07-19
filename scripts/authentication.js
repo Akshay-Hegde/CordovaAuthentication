@@ -1,10 +1,10 @@
 function authCheckPreAuth() {
-    console.log("Entering the function: checkPreAuth");
     var form = $("#loginForm");
     if (window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
         $("#username", form).val(window.localStorage["username"]);
         $("#password", form).val(window.localStorage["password"]);
-        handleLogin();
+        console.log("Autologging in");
+        authHandleLogin();
     }
 }
 
@@ -14,9 +14,7 @@ function authHandleLogin() {
     $("#submitButton", form).attr("disabled", "disabled");
     var u = $("#username", form).val();
     var p = $("#password", form).val();
-    console.log("Entering the function: handleLogin, information=" + u + "/" + p);
     if (u != '' && p != '') {
-        console.log("about ready to post to CordovaLogOn");
         $.ajax({
             type: "GET",
             url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOn",
@@ -26,14 +24,13 @@ function authHandleLogin() {
             dataType: "jsonp",
             jsonpCallback: "authLoginSuccess",
             error: function (jqXHR, textStatus, errorThrown) {
-                //alert(errorThrown + textStatus + jqXHR);
+                alert(errorThrown + textStatus + jqXHR);
                 console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
                 //navigator.notification.alert("Your login failed", function () { });
             }
         });
-        console.log("after the ajax call");
     } else {
-        console.log("go on back");
+        console.log("userid or password is null");
         //navigator.notification.alert("You must enter a username and password", function () { });
     }
     $("#submitButton").removeAttr("disabled");
@@ -41,9 +38,6 @@ function authHandleLogin() {
 }
 
 function authLoginSuccess(data) {
-    console.log("JSON from backend => success=" + data.success);
-    window.localStorage["username"] = data.username;
-    window.localStorage["password"] = data.password;
     $.mobile.changePage("#mainPage");
 }
 
@@ -57,7 +51,7 @@ function authLogout() {
         dataType: "jsonp",
         jsonpCallback: "authLogoutSuccess",
         error: function (jqXHR, textStatus, errorThrown) {
-            //alert(errorThrown + textStatus + jqXHR);
+            alert(errorThrown + textStatus + jqXHR);
             console.log("logout failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
             authReturnToLogonScreen();
             //navigator.notification.alert("Your login failed", function () { });
@@ -71,6 +65,7 @@ function authLogoutSuccess() {
 }
 
 function authReturnToLogonScreen() {
+    //$("#userNotAuthorizedPopup").popup("open");
     $("#password").val('');
     $.mobile.changePage("#loginPage");
 }

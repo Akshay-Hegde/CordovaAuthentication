@@ -6,18 +6,22 @@ function loadsGetTestLoads() {
         crossDomain: true,
         timeout: 2000,
         dataType: "jsonp",
-        jsonpCallback: "authRetrievedLoads",
+        jsonpCallback: "loadsAuthRetrievedLoads",
         error: function (jqXHR, textStatus, errorThrown) {
             //alert(errorThrown + textStatus + jqXHR);
             console.log("jsonp failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
         }
     });
-    console.log("after the ajax call");
     return false;
 }
 
-function authRetrievedLoads(data) {
+function loadsAuthRetrievedLoads(data) {
     console.log(data.success);
+    if (data.success != "true") {
+        console.log("failed validation");
+        authReturnToLogonScreen();
+    } 
+
     $("#testGetLoads").html("Success: " + data.success + " - Action: " + data.action)
     console.log("html changed");
 }
