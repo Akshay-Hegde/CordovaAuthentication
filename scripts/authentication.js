@@ -1,23 +1,4 @@
-$(document).bind("mobileinit", function () {
-    $.extend($.mobile, {
-        allowCrossDomainPages: true
-    });
-
-    $.extend($.support, {
-        cors: true
-    });
-});
-
-function init() {
-    //document.addEventListener("deviceready", deviceReady, true);
-    $(document).ready(function () {
-        $("#loginForm").on("submit", handleLogin);
-    });
-    delete init;
-}
-
-
-function checkPreAuth() {
+function authCheckPreAuth() {
     console.log("Entering the function: checkPreAuth");
     var form = $("#loginForm");
     if (window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
@@ -27,7 +8,7 @@ function checkPreAuth() {
     }
 }
 
-function handleLogin() {
+function authHandleLogin() {
     
     var form = $("#loginForm");
     $("#submitButton", form).attr("disabled", "disabled");
@@ -40,31 +21,56 @@ function handleLogin() {
             type: "GET",
             url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOn",
             crossDomain: true,
-            timeout: 10000,
+            timeout: 2000,
             data: { username: u, password: p },
             dataType: "jsonp",
-            jsonpCallback: "loginSuccess",
+            jsonpCallback: "authLoginSuccess",
             error: function (jqXHR, textStatus, errorThrown) {
                 //alert(errorThrown + textStatus + jqXHR);
                 console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
-                navigator.notification.alert("Your login failed", function () { });
+                //navigator.notification.alert("Your login failed", function () { });
             }
-         });
+        });
+        console.log("after the ajax call");
     } else {
         console.log("go on back");
-        navigator.notification.alert("You must enter a username and password", function () { });
+        //navigator.notification.alert("You must enter a username and password", function () { });
     }
     $("#submitButton").removeAttr("disabled");
     return false;
 }
 
-function loginSuccess(data) {
+function authLoginSuccess(data) {
     console.log("JSON from backend => success=" + data.success);
     window.localStorage["username"] = data.username;
     window.localStorage["password"] = data.password;
     $.mobile.changePage("#mainPage");
 }
 
-function deviceReady() {
-    $("#loginForm").on("submit", handleLogin);
+function authLogout() {
+    console.log("logging out of application");
+    $.ajax({
+        type: "GET",
+        url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOff",
+        crossDomain: true,
+        timeout: 2000,
+        dataType: "jsonp",
+        jsonpCallback: "authLoginSuccess",
+        error: function (jqXHR, textStatus, errorThrown) {
+            //alert(errorThrown + textStatus + jqXHR);
+            console.log("logout failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
+            authReturnToLogonScreen();
+            //navigator.notification.alert("Your login failed", function () { });
+        }
+    });
+}
+
+function authLogoutSuccess() {
+    console.log("successfully logged out");
+    authReturnToLogonScreen(); ;
+}
+
+function authReturnToLogonScreen() {
+    $("#password").val('');
+    $.mobile.changePage("#loginPage");
 }
