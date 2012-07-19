@@ -5,6 +5,12 @@ function authCheckPreAuth() {
         $("#password", form).val(window.localStorage["password"]);
         console.log("Autologging in");
         authHandleLogin();
+        return;
+    }
+
+    if (window.localStorage["username"] != undefined) {
+        var form = $("#loginForm");
+        var u = $("#username", form).val(window.localStorage["username"]);
     }
 }
 
@@ -38,11 +44,14 @@ function authHandleLogin() {
 }
 
 function authLoginSuccess(data) {
+    window.localStorage.setItem("username", data.username);
+    window.localStorage.setItem("password", data.password);
     $.mobile.changePage("#mainPage");
 }
 
 function authLogout() {
     console.log("logging out of application");
+    window.localStorage.removeItem("password");
     $.ajax({
         type: "GET",
         url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOff",
