@@ -55,7 +55,7 @@ function authLogout() {
         crossDomain: true,
         timeout: 2000,
         dataType: "jsonp",
-        jsonpCallback: "authLoginSuccess",
+        jsonpCallback: "authLogoutSuccess",
         error: function (jqXHR, textStatus, errorThrown) {
             //alert(errorThrown + textStatus + jqXHR);
             console.log("logout failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
