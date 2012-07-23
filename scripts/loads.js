@@ -2,7 +2,7 @@ function loadsGetTestLoads() {
     console.log("Getting test loads - testing authentication");
     $.ajax({
         type: "GET",
-        url: "http://192.168.1.111/CarrierVisibility/Loads/TestCordovaAuthorization",
+        url: ajaxBase + "Loads/TestCordovaAuthorization",
         crossDomain: true,
         timeout: 2000,
         dataType: "jsonp",

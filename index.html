@@ -28,9 +28,14 @@
         <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.min.css" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="css/jquery.mobile.theme-1.1.1.min.css" type="text/css" charset="utf-8" />
 
+        <script type="text/javascript">
+            var ajaxBase = "http://pdc00appd101w:8090/CarrierVisibility/";
+        </script>
+
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/authentication.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/mainPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/loads.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/events.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.1.1.min.js"></script>
@@ -68,7 +73,6 @@
                 <a data-role="button" href="#popupPage" data-rel="dialog" data-transition="pop">Open Dialog </a>
                 <a data-role="button" href="#page2">Page Switch</a>
                 <a data-role="button" id="testLoadsButton">Test Authentication</a>
-                <a data-role="button" href="#userNotAuthorizedPopup" data-rel="popup" data-transition="pop">Test Popup</a>
                 <div id="testGetLoads"></div>
             </div>
             <div data-role="footer">
@@ -94,10 +98,6 @@
             <div data-role="content">
                 <h1>Whatever</h1>
             </div>
-        </div>
-
-        <div data-role="popup" id="userNotAuthorizedPopup">
-	        Thou art not validated
         </div>
    </body>
 </html>

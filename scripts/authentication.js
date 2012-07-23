@@ -9,7 +9,6 @@ function authCheckPreAuth() {
     }
 
     if (window.localStorage["username"] != undefined) {
-        var form = $("#loginForm");
         var u = $("#username", form).val(window.localStorage["username"]);
     }
 }
@@ -23,7 +22,7 @@ function authHandleLogin() {
     if (u != '' && p != '') {
         $.ajax({
             type: "GET",
-            url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOn",
+            url: ajaxBase + "Account/CordovaLogOn",
             crossDomain: true,
             timeout: 2000,
             data: { username: u, password: p },
@@ -44,9 +43,14 @@ function authHandleLogin() {
 }
 
 function authLoginSuccess(data) {
-    window.localStorage.setItem("username", data.username);
-    window.localStorage.setItem("password", data.password);
-    $.mobile.changePage("#mainPage");
+    if (data.success == "true") {
+        window.localStorage.setItem("username", data.username);
+        window.localStorage.setItem("password", data.password);
+        mainResetPage();
+        $.mobile.changePage("#mainPage");
+    } else {
+        $("#password").val('');
+    }
 }
 
 function authLogout() {
@@ -54,7 +58,7 @@ function authLogout() {
     window.localStorage.removeItem("password");
     $.ajax({
         type: "GET",
-        url: "http://192.168.1.111/CarrierVisibility/Account/CordovaLogOff",
+        url: ajaxBase + "Account/CordovaLogOff",
         crossDomain: true,
         timeout: 2000,
         dataType: "jsonp",
@@ -74,7 +78,6 @@ function authLogoutSuccess() {
 }
 
 function authReturnToLogonScreen() {
-    //$("#userNotAuthorizedPopup").popup("open");
     $("#password").val('');
     $.mobile.changePage("#loginPage");
 }

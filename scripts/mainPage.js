@@ -1,0 +1,3 @@
+function mainResetPage() {
+    $("#testGetLoads").html("");
+}
