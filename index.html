@@ -19,14 +19,13 @@
 -->
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Cordova Authentication</title>
 
-        <link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
-        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" type="text/css" charset="utf-8" />
-        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.min.css" type="text/css" charset="utf-8" />
-        <link rel="stylesheet" href="css/jquery.mobile.theme-1.1.1.min.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.css" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.theme-1.1.1.css" type="text/css"/>
 
         <script type="text/javascript">
             var ajaxBase = "http://pdc00appd101w:8090/CarrierVisibility/";
@@ -39,28 +38,34 @@
         <script type="text/javascript" charset="utf-8" src="scripts/loads.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/events.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.1.1.min.js"></script>
+
+        <style type="text/css">
+            [data-role=page] { max-width:480px; margin: 0 auto; -moz-box-shadow: 0px 0px 10px #8e8e8e; -webkit-box-shadow: 0px 0px 10px #8e8e8e; box-shadow: 0px 0px 10px #8e8e8e; }
+            [date-role=contente] {height: auto } 
+            
+            div.ftr { text-align: center; }
+            p.ftrtext { font-size: small; text-align: center;}
+            p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
+        </style>
     </head>
 
-    <body onload="init()">
-        <div id="loginPage" data-role="page">
-            <div data-role="header">
-                <h1>Authentication Demo</h1>
-            </div>
+    <body onload="init()" id="container">
+        <div id="loginPage" data-role="page" class="type-home">
+            <div data-role="header" data-theme="f">
+				<div id="logo">
+                	<img src="images/ohl-logo.png" alt="OHL" title="OHL" />
+                </div>
+                <p class="app-title">Carrier Visibility</p>
+		    </div>
             <div data-role="content">
                 <form id="loginForm">
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" value="" placeholder="Username"/>
-                    </div>
-                    <div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                    </div>
+                    <input name="username" id="username" value="" placeholder="Username"/>
+                    <input type="password" name="password" id="password" value="" placeholder="Password"/>
                     <input type="submit" value="Login" id="submitButton"/>
                 </form>
             </div>
-            <div data-role="footer">
-                <h4>Company Name Here</h4>
+            <div data-role="footer" data-position="fixed" data-theme="none">    
+                <p class="ftrtext">© 2012 Ozburn-Hessey Logistics, LLC</p>
             </div>
         </div>
 

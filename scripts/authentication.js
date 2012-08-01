@@ -24,7 +24,7 @@ function authHandleLogin() {
             type: "GET",
             url: ajaxBase + "Account/CordovaLogOn",
             crossDomain: true,
-            timeout: 2000,
+            timeout: 5000,
             data: { username: u, password: p },
             dataType: "jsonp",
             jsonpCallback: "authLoginSuccess",
