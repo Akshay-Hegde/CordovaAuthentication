@@ -19,13 +19,13 @@
 -->
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Cordova Authentication</title>
 
-        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.css" type="text/css"/>
-        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" type="text/css"/>
-        <link rel="stylesheet" href="css/jquery.mobile.theme-1.1.1.css" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0-alpha.1.min.css" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.2.0-alpha.1.min.css" type="text/css"/>
+        <link rel="stylesheet" href="css/jquery.mobile.theme-1.2.0-alpha.1.min.css" type="text/css"/>
 
         <script type="text/javascript">
             var ajaxBase = "http://pdc00appd101w.ohlogistics.com:8090/CarrierVisibility/";
@@ -33,23 +33,36 @@
 
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/global.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/authentication.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/mainPage.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/loads.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/events.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.1.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/initialize.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.2.0-alpha.1.min.js"></script>
 
         <style type="text/css">
-            [data-role=page] { max-width:480px; margin: 0 auto; -moz-box-shadow: 0px 0px 10px #8e8e8e; -webkit-box-shadow: 0px 0px 10px #8e8e8e; box-shadow: 0px 0px 10px #8e8e8e; }
-            [date-role=contente] {height: auto } 
-            
             div.ftr { text-align: center; }
             p.ftrtext { font-size: small; text-align: center;}
             p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
+            
+
+            #loginFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
+            input.login-input { padding-top: 5px; padding-bottom: 5px; }
+            #loginForm a { margin-bottom: 20px; }
+            
+            #forgotPasswordDialog .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
+            #forgotPasswordDialog div[data-role="content"] { height: auto !important; }
+            #forgotPasswordDialog div.forgot-password-text { padding-bottom: 15px; }
+            #forgotPasswordDialog div.ui-block-a { margin-left: 10px; position: relative; float: left; }
+            #forgotPasswordDialog div.ui-block-b { width: auto; }
+            #forgotPasswordDialog div.ui-block-c { margin-right: 10px; position: relative; float: right; }
+            #forgotPasswordDialog .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; position: relative; top: -15px; }
+
         </style>
+
     </head>
 
-    <body onload="init()" id="container">
+    <body id="container">
+
         <div id="loginPage" data-role="page" class="type-home">
             <div data-role="header" data-theme="f">
 				<div id="logo">
@@ -58,51 +71,38 @@
                 <p class="app-title">Carrier Visibility</p>
 		    </div>
             <div data-role="content">
-                <form id="loginForm">
-                    <input name="username" id="username" value="" placeholder="Username"/>
-                    <input type="password" name="password" id="password" value="" placeholder="Password"/>
-                    <input type="submit" value="Login" id="submitButton"/>
-                </form>
+                <div>
+                    <fieldset id="loginFieldset">
+                        <legend>Login</legend>
+                        <form id="loginForm">
+                            <input class="login-input" name="username" id="username" value="" placeholder="Username"/>
+                            <input class="login-input" type="password" name="password" id="password" value="" placeholder="Password"/>
+                            <a id="submitButton" data-role="button" data-mini="true">Login</a>
+                        </form>
+                        <a id="forgot-password" href="#forgotPasswordDialog" data-rel="popup" data-transition="fade">Forgot Pasword?</a>
+                    </fieldset>
+                </div>
             </div>
-            <div data-role="footer" data-position="fixed" data-theme="none">    
+            <div data-role="footer" data-theme="none">    
                 <p class="ftrtext">© 2012 Ozburn-Hessey Logistics, LLC</p>
             </div>
-        </div>
 
-        <div id="mainPage" data-role="page">
-            <div data-role="header">
-                <h1>Home</h1>
-                <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
-            </div>
-            <div data-role="content">
-                <a data-role="button" href="#popupPage" data-rel="dialog" data-transition="pop">Open Dialog </a>
-                <a data-role="button" href="#page2">Page Switch</a>
-                <a data-role="button" id="testLoadsButton">Test Authentication</a>
-                <div id="testGetLoads"></div>
-            </div>
-            <div data-role="footer">
-                <h4>Footer</h4>
-            </div>
-        </div>
-
-        <div id="page2" data-role="page">
-            <div data-role="header">
-                <h1>Page 2</h1>
-                <a href="#loginPage" data-mini="true" class="ui-btn-right">Logout</a>
-            </div>
-            <div data-role="content">
-                <h1>Now I am starting to understand</h1>
-                <a data-role="button" href="#mainPage">Page Switch</a>
+            <div id="forgotPasswordDialog" data-role="popup">
+                <div data-role="header" data-theme="b">
+                    <h3>Forgot Password?</h3>
+	            </div>
+                <div data-role="content">
+                    <div>
+                        <div class="forgot-password-text">Click the "Reset" button for a reset password email to be sent to you.  You will need to follow the instructions in the email to reset your password.</div>
+                        <div class="ui-grid-b">
+                            <div class="ui-block-a"><a data-role="button" data-rel="back" data-mini="true">Cancel</a></div>
+                            <div class="ui-block-b"></div>
+                            <div class="ui-block-c"><a data-role="button" data-rel="back" data-mini="true">Reset</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="popupPage" data-role="page">
-            <div data-role="header">
-                <h1>Popup Screen</h1>
-            </div>
-            <div data-role="content">
-                <h1>Whatever</h1>
-            </div>
-        </div>
    </body>
 </html>

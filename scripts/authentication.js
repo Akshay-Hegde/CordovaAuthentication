@@ -1,16 +1,17 @@
 function authCheckPreAuth() {
     var form = $("#loginForm");
-    if (window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
-        $("#username", form).val(window.localStorage["username"]);
-        $("#password", form).val(window.localStorage["password"]);
-        console.log("Autologging in");
-        authHandleLogin();
-        return;
-    }
 
-    if (window.localStorage["username"] != undefined) {
-        var u = $("#username", form).val(window.localStorage["username"]);
-    }
+//    if (window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
+//        $("#username", form).val(window.localStorage["username"]);
+//        $("#password", form).val(window.localStorage["password"]);
+//        console.log("Autologging in");
+//        authHandleLogin();
+//        return;
+//    }
+
+//    if (window.localStorage["username"] != undefined) {
+//        var u = $("#username", form).val(window.localStorage["username"]);
+//    }
 }
 
 function authHandleLogin() {
@@ -44,40 +45,11 @@ function authHandleLogin() {
 
 function authLoginSuccess(data) {
     if (data.success == "true") {
-        window.localStorage.setItem("username", data.username);
-        window.localStorage.setItem("password", data.password);
+//        window.localStorage.setItem("username", data.username);
+//        window.localStorage.setItem("password", data.password);
         mainResetPage();
-        $.mobile.changePage("#mainPage");
+        $.mobile.changePage("main.html");
     } else {
         $("#password").val('');
     }
-}
-
-function authLogout() {
-    console.log("logging out of application");
-    window.localStorage.removeItem("password");
-    $.ajax({
-        type: "GET",
-        url: ajaxBase + "Account/CordovaLogOff",
-        crossDomain: true,
-        timeout: 2000,
-        dataType: "jsonp",
-        jsonpCallback: "authLogoutSuccess",
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown + textStatus + jqXHR);
-            console.log("logout failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
-            authReturnToLogonScreen();
-            //navigator.notification.alert("Your login failed", function () { });
-        }
-    });
-}
-
-function authLogoutSuccess() {
-    console.log("successfully logged out");
-    authReturnToLogonScreen(); ;
-}
-
-function authReturnToLogonScreen() {
-    $("#password").val('');
-    $.mobile.changePage("#loginPage");
 }
