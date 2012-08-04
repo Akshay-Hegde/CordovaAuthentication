@@ -1,17 +1,17 @@
 function authCheckPreAuth() {
     var form = $("#loginForm");
 
-//    if (window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
-//        $("#username", form).val(window.localStorage["username"]);
-//        $("#password", form).val(window.localStorage["password"]);
-//        console.log("Autologging in");
-//        authHandleLogin();
-//        return;
-//    }
+    if (window.localStorage.getItem("username") != undefined && window.localStorage.getItem("password") != undefined) {
+        $("#username", form).val(window.localStorage.getItem("username"));
+        $("#password", form).val(window.localStorage.getItem("password"));
+        console.log("Autologging in");
+        authHandleLogin();
+        return;
+    }
 
-//    if (window.localStorage["username"] != undefined) {
-//        var u = $("#username", form).val(window.localStorage["username"]);
-//    }
+    if (window.localStorage.getItem("username") != undefined) {
+        var u = $("#username", form).val(window.localStorage.getItem("username"));
+    }
 }
 
 function authHandleLogin() {
@@ -45,8 +45,8 @@ function authHandleLogin() {
 
 function authLoginSuccess(data) {
     if (data.success == "true") {
-//        window.localStorage.setItem("username", data.username);
-//        window.localStorage.setItem("password", data.password);
+        window.localStorage.setItem("username", data.username);
+        window.localStorage.setItem("password", data.password);
         mainResetPage();
         $.mobile.changePage("main.html");
     } else {
