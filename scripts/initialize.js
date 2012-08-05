@@ -89,7 +89,7 @@ $(document).on("pageshow", function () {
         case "truckStopsPage":
         case "truckStops.html":
             //console.log("showing truck stops page");
-            navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError);
+            navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError, { enableHighAccuracy: true });
             //populateMap();
             break;
         default:
