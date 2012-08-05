@@ -22,6 +22,6 @@ function loadsAuthRetrievedLoads(data) {
         authReturnToLogonScreen();
     }
 
-    $("#testGetLoads").html("Success: " + data.success + " - Action: " + data.action)
+    $("#testGetLoads").html("Success: " + data.success + " - Action: " + data.action);
     console.log("html changed");
 }

@@ -38,15 +38,28 @@ $(document).on('pageinit', function (event) {
     switch (pageName) {
         case "loginPage":
         case "index.html":
-            console.log("initializing login page");
+            //console.log("initializing login page");
             $("#loginPage #submitButton").click(authHandleLogin);
             authCheckPreAuth();
+
+            if (debugUsername != "") {
+                $("#loginPage #username").val(debugUsername);
+            }
+            if (debugPassword != "") {
+                $("#loginPage #password").val(debugPassword);
+            }
+
             break;
         case "mainPage":
         case "main.html":
-            console.log("initializing main page");
+            //console.log("initializing main page");
             $("#mainPage .ohl-logout-button").click(authLogout);
             $("#mainPage #testLoadsButton").click(loadsGetTestLoads);
+            break;
+        case "truckStopsPage":
+        case "truckStops.html":
+            //console.log("initializing truck stops page");
+            $("#truckStopsPage .ohl-logout-button").click(authLogout);
             break;
         default:
             //alert("unknown page: " + pageName);
@@ -54,7 +67,7 @@ $(document).on('pageinit', function (event) {
 });
 
 $(document).on("pageshow", function () {
-    fixgeometry();
+    //fixgeometry();
 
     var activePage = $.mobile.activePage;
     var pageName = getPageName(activePage.attr('data-url'));
@@ -67,11 +80,17 @@ $(document).on("pageshow", function () {
     switch (pageName) {
         case "loginPage":
         case "index.html":
-            console.log("showing login page");
+            //console.log("showing login page");
             break;
         case "mainPage":
         case "main.html":
-            console.log("showing main page");
+            //console.log("showing main page");
+            break;
+        case "truckStopsPage":
+        case "truckStops.html":
+            //console.log("showing truck stops page");
+            navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError);
+            //populateMap();
             break;
         default:
             //alert("unknown page: " + pageName);

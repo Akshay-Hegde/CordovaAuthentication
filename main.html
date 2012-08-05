@@ -1,68 +1,20 @@
-﻿<!DOCTYPE html>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
+﻿<div id="mainPage" data-role="page">
 
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License. 
--->
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Cordova Authentication</title>
-
-        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.css" type="text/css"/>
-        <link rel="stylesheet" href="css/jquery.mobile.structure-1.1.1.css" type="text/css"/>
-        <link rel="stylesheet" href="css/jquery.mobile.theme-1.1.1.css" type="text/css"/>
-
-        <script type="text/javascript">
-            var ajaxBase = "http://pdc00appd101w.ohlogistics.com:8090/CarrierVisibility/";
-        </script>
-
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/global.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/mainPage.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.1.1.min.js"></script>
-
-        <style type="text/css">
-            div.ftr { text-align: center; }
-            p.ftrtext { font-size: small; text-align: center;}
-            p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
-        </style>
-
-    </head>
-
-    <body onload="initMainPage()" id="container"> 
-
-        <div id="mainPage" data-role="page">
-
-            <div data-role="header">
-                <h1>Home</h1>
-                <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
-            </div>
-            <div data-role="content">
-                <!--<a data-role="button" href="#popupPage" data-rel="dialog" data-transition="pop">Open Dialog </a>
-                <a data-role="button" href="#page2">Page Switch</a>-->
-                <a data-role="button" id="testLoadsButton">Test Authentication</a>
-                <div id="testGetLoads"></div>
-            </div>
-            <div data-role="footer">
-                <h4>Footer</h4>
-            </div>
-        </div>
-
-   </body>
-</html>
+    <div data-role="header">
+        <h1>Carrier Visibility</h1>
+        <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+            <li data-icon="arrow-r" data-theme="b">
+                <a href="searchLoads.html"><img src="images/06-magnify.png" class="ui-li-icon"/>Search for Loads</a>
+            </li>
+            <li data-icon="arrow-r" data-theme="b">
+                <a href="truckStops.html"><img src="images/47-fuel.png" class="ui-li-icon"/>Find Local Truck Stops</a>
+            </li>
+            <li data-icon="arrow-r" data-theme="b">
+                <a href="weather.html"><img src="images/25-weather.png" class="ui-li-icon"/>View Weather</a>
+            </li>
+        </ul>
+    </div>
+</div>

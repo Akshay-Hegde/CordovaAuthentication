@@ -29,6 +29,10 @@
 
         <script type="text/javascript">
             var ajaxBase = "http://pdc00appd101w.ohlogistics.com:8090/CarrierVisibility/";
+
+            var debugUsername = "tgrover@ohl.com";
+            var debugPassword = "RW$}*uP>"
+            var googleMapsIsReady = false;
         </script>
 
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -36,17 +40,32 @@
         <script type="text/javascript" charset="utf-8" src="scripts/global.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/authentication.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/mainPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/truckStopsPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/initialize.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.2.0-alpha.1.min.js"></script>
+        <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBCrzwEjM9Os-5z7vEEX-wwDbSW2O_WqJQ&sensor=true&callback=googleMapsReady"></script>-->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.9&sensor=true"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.map.full.min.js"></script>
 
         <style type="text/css">
-            div.ftr { text-align: center; }
-            p.ftrtext { font-size: small; text-align: center;}
+
+            @media only screen and (min-width: 1025px){
+                .ui-page {
+                    width: 600px !important;
+                    margin: 0 auto !important;
+                    position: relative !important;
+                    border-right: 5px #666 outset !important;
+                    border-left: 5px #666 outset !important;
+                }
+            }
+            
+            .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
             
-
+            #loginPage .ftr { text-align: center; }
+            #loginPage p.ftrtext { font-size: small; text-align: center;}
             #loginFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
-            input.login-input { padding-top: 5px; padding-bottom: 5px; }
+            #loginForm input.login-input { padding-top: 5px; padding-bottom: 5px; }
             #loginForm a { margin-bottom: 20px; }
             
             #forgotPasswordDialog .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
@@ -56,6 +75,8 @@
             #forgotPasswordDialog div.ui-block-b { width: auto; }
             #forgotPasswordDialog div.ui-block-c { margin-right: 10px; position: relative; float: right; }
             #forgotPasswordDialog .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; position: relative; top: -15px; }
+            
+            #mainPage div.ohl-list-item { display: inline; }
 
         </style>
 
@@ -95,9 +116,9 @@
                     <div>
                         <div class="forgot-password-text">Click the "Reset" button for a reset password email to be sent to you.  You will need to follow the instructions in the email to reset your password.</div>
                         <div class="ui-grid-b">
-                            <div class="ui-block-a"><a data-role="button" data-rel="back" data-mini="true">Cancel</a></div>
+                            <div class="ui-block-a"><a data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a></div>
                             <div class="ui-block-b"></div>
-                            <div class="ui-block-c"><a data-role="button" data-rel="back" data-mini="true">Reset</a></div>
+                            <div class="ui-block-c"><a data-role="button" data-rel="back" data-inline="true" data-mini="true">Reset</a></div>
                         </div>
                     </div>
                 </div>

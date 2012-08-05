@@ -13,7 +13,6 @@ function authLogout() {
         dataType: "jsonp",
         jsonpCallback: "authLogoutSuccess",
         error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown + textStatus + jqXHR);
             console.log("logout failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
             authReturnToLogonScreen();
             //navigator.notification.alert("Your login failed", function () { });
