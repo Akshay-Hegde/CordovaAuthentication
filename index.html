@@ -44,8 +44,11 @@
         <script type="text/javascript" charset="utf-8" src="scripts/initialize.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.2.0-alpha.1.min.js"></script>
         <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBCrzwEjM9Os-5z7vEEX-wwDbSW2O_WqJQ&sensor=true&callback=googleMapsReady"></script>-->
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.9&sensor=true"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.9&sensor=true&libraries=places"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.autocomplete.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.map.full.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.map.extensions.js"></script>
+        
 
         <style type="text/css">
 
@@ -59,6 +62,16 @@
                 }
             }
             
+            .ohl-bg-gradient {
+                background: -ms-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
+                background: -moz-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
+                background: -o-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #ACD6FF));
+                background: -webkit-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
+                background: linear-gradient(to top, #FFFFFF 0%, #ACD6FF 100%);
+            }
+
+            
             .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
             
@@ -67,6 +80,9 @@
             #loginFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
             #loginForm input.login-input { padding-top: 5px; padding-bottom: 5px; }
             #loginForm a { margin-bottom: 20px; }
+            #loginPage #forgot-password { float: left; font-size: small; padding-left: 5px; }
+            #loginPage #register-new-account { float: right; font-size: small; padding-right: 5px; }
+            #loginPage [data-role="footer"] { position: absolute; bottom: 0px; width: 100%; text-align: center; }
             
             #forgotPasswordDialog .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             #forgotPasswordDialog div[data-role="content"] { height: auto !important; }
@@ -84,7 +100,7 @@
 
     <body id="container">
 
-        <div id="loginPage" data-role="page" class="type-home">
+        <div id="loginPage" data-role="page" class="type-home ohl-bg-gradient">
             <div data-role="header" data-theme="f">
 				<div id="logo">
                 	<img src="images/ohl-logo.png" alt="OHL" title="OHL" />
@@ -100,7 +116,10 @@
                             <input class="login-input" type="password" name="password" id="password" value="" placeholder="Password"/>
                             <a id="submitButton" data-role="button" data-mini="true">Login</a>
                         </form>
-                        <a id="forgot-password" href="#forgotPasswordDialog" data-rel="popup" data-transition="fade">Forgot Pasword?</a>
+                        <div style="position: relative;"> 
+                            <a id="forgot-password" href="#forgotPasswordDialog" data-rel="popup" data-transition="fade">Forgot Pasword?</a>
+                            <a id="register-new-account" href="register.html" data-transition="fade">Register</a>
+                        </div>
                     </fieldset>
                 </div>
             </div>

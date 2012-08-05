@@ -89,7 +89,39 @@ $(document).on("pageshow", function () {
         case "truckStopsPage":
         case "truckStops.html":
             //console.log("showing truck stops page");
-            navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError, { enableHighAccuracy: true });
+            //navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError, { enableHighAccuracy: true });
+            var o = { 'center': '36.3047, -86.62', 'zoom': 13, 'streetViewControl': false, 'zoomControl': true, 'panControl': true, 'mapTypeControl': false, 'mapTypeId': 'terrain' };
+            $('#map_canvas').gmap(o).bind('init', function (event, map) {
+                $('#map_canvas').gmap('addControl', 'control', 1);
+                $('#map_canvas').gmap('autocomplete', 'places', function (ui) {
+                    $('#map_canvas').gmap('clear', 'markers');
+                    $('#map_canvas').gmap('set', 'bounds', null);
+                    $.mobile.pageLoading();
+                    $('#map_canvas').gmap('placesSearch', { 'location': ui.item.position, 'radius': '5000'/*, 'name': ['store']*/ }, function (results, status) {
+                        if (status === 'OK') {
+                            $.each(results, function (i, item) {
+                                var content = '<div class="places-img"><img src="' + item.icon + '"/></div><div class="places-text"><h3>' + item.name + '</h3></div><div class="clear"></div>';
+                                $('#map_canvas').gmap('addMarker', { 'id': item.id, /*'icon': item.icon,*/'position': item.geometry.location, 'bounds': true }).click(function () {
+                                    $('#map_canvas').gmap('openInfoWindow', { 'content': content }, this);
+                                });
+                            });
+                        }
+                        $.mobile.pageLoading(true);
+                    });
+                });
+                $('#control').show();
+            });
+
+            var defaultValue = $('#places').val();
+            $('#places').focus(function () {
+                if ($(this).val() === defaultValue) {
+                    $(this).val('');
+                }
+            }).blur(function () {
+                if ($(this).val() == '') {
+                    $(this).val(defaultValue);
+                }
+            });
             //populateMap();
             break;
         default:
