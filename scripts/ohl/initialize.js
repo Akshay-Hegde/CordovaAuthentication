@@ -61,6 +61,11 @@ $(document).on('pageinit', function (event) {
             //console.log("initializing truck stops page");
             $("#truckStopsPage .ohl-logout-button").click(authLogout);
             break;
+        case "weatherPage":
+        case "weather.html":
+            //console.log("initializing truck stops page");
+            $("#weatherPage .ohl-logout-button").click(authLogout);
+            break;
         default:
             //alert("unknown page: " + pageName);
     }
@@ -123,6 +128,12 @@ $(document).on("pageshow", function () {
                 }
             });
             //populateMap();
+            break;
+        case "weatherPage":
+        case "weather.html":
+            //console.log("initializing truck stops page");
+            navigator.geolocation.getCurrentPosition(getWeatherGeoLocationSuccess, getWeatherGeoLocationError);
+            $("#weatherPage .ohl-logout-button").click(authLogout);
             break;
         default:
             //alert("unknown page: " + pageName);

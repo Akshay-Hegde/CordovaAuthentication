@@ -36,19 +36,23 @@
         </script>
 
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/global.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/authentication.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/mainPage.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/truckStopsPage.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/initialize.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.mobile-1.2.0-alpha.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/knockout/knockout-latest.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/knockout/knockout.mapping.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/authentication.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/mainPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/truckStopsPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/weatherPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/viewModels.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/ohl/initialize.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery.mobile-1.2.0-alpha.1.min.js"></script>
         <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBCrzwEjM9Os-5z7vEEX-wwDbSW2O_WqJQ&sensor=true&callback=googleMapsReady"></script>-->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.9&sensor=true&libraries=places"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.autocomplete.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.map.full.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/jquery.ui.map.extensions.js"></script>
-        
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery.ui.autocomplete.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery.ui.map.full.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery.ui.map.extensions.js"></script>
 
         <style type="text/css">
 
@@ -93,7 +97,14 @@
             #forgotPasswordDialog .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; position: relative; top: -15px; }
             
             #mainPage div.ohl-list-item { display: inline; }
-
+            
+            #weatherPage .weather-data-container { display: none; }
+            #weatherPage #currentWeatherFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
+            #weatherPage #currentWeatherFieldsetContainer { position: relative; }
+            #weatherPage #currentWeatherIcon { float: left; padding: 10px 10px 10px 10px; }
+            #weatherPage #currentWeatherData { float: left;  }
+            #weatherPage #currentWeatherData td { padding: 5px 5px 5px 5px; }
+            
         </style>
 
     </head>

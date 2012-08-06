@@ -5,6 +5,27 @@
         <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
     </div>
     <div data-role="content">
-        Local Weather
+        <div class="weather-data-container">
+            <div class="weather-data-current">
+                <fieldset id="currentWeatherFieldset">
+                    <legend>Current Weather</legend>
+                    <div id="currentWeatherFieldsetContainer">
+                        <div id="currentWeatherIcon">
+                            <img data-bind="attr: { src: icon }"></img>
+                        </div>
+                        <table id="currentWeatherData">
+                            <tr>
+                                <td id="currentWeatherDesc"><b>Description:</b> <span data-bind="text: description"></span></td>
+                                <td id="currentWeatherTemp"><b>Temperature:</b> <span data-bind="text: temperature"></span></td>
+                            </tr>
+                            <tr>
+                                <td id="currentWeatherWind"><b>Wind Speed:</b> <span data-bind="text: windSpeed"></span></td>
+                                <td id="currentWeatherWindDir"><b>Wind Direction:</b> <span data-bind="text: windDirection"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
     </div>
 </div>

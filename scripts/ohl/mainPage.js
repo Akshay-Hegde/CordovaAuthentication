@@ -1,3 +1,7 @@
+function mainResetPage() {
+    $("#testGetLoads").html("");
+}
+
 function loadsGetTestLoads() {
     console.log("Getting test loads - testing authentication");
     $.ajax({
