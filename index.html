@@ -64,11 +64,8 @@
             @media only screen and (min-width: 1px){
                 .ui-page 
                 {
-                    width: 320px !important;
                     margin: 0 auto !important;
                     position: relative !important;
-                    border-right: 5px #666 outset !important;
-                    border-left: 5px #666 outset !important;
                 }
                 #weatherPage #currentWeatherFieldset { display: none; }
                 #weatherPage #fiveDayWeatherFieldset { display: none; }
@@ -79,6 +76,7 @@
                 #mainPage #mainMenu320 { display: block; }
                 #mainPage
                 {
+                    background-color: White;
                     background-image:url('images/Turbo_Truck_320.jpg'); 
                     background-repeat:no-repeat;
                     background-attachment:fixed;
@@ -91,11 +89,8 @@
             @media only screen and (min-width: 480px){
                 .ui-page 
                 {
-                    width: 480px !important;
                     margin: 0 auto !important;
                     position: relative !important;
-                    border-right: 5px #666 outset !important;
-                    border-left: 5px #666 outset !important;
                 }
                 #weatherPage #currentWeatherFieldset320 { display: none; }
                 #weatherPage #fiveDayWeatherFieldset320 { display: none; }
@@ -106,6 +101,7 @@
                 #mainPage #mainMenu320 { display: none; }
                 #mainPage
                 {
+                    background-color: White;
                     background-image:url('images/Turbo_Truck_480.jpg'); 
                     background-repeat:no-repeat;
                     background-attachment:fixed;
@@ -113,6 +109,11 @@
                 }
                 
                 #truckStopsPage #truckStopSearchResult td.search-description { display: block; }
+            }
+            
+            @media only screen and (min-width: 600px)
+            {
+                .ui-page { width: 600px !important; }
             }
 
             .ohl-bg-gradient {
@@ -136,9 +137,9 @@
             #loginPage #register-new-account { float: right; font-size: small; padding-right: 5px; }
             #loginPage [data-role="footer"] { position: absolute; bottom: 0px; width: 100%; text-align: center; }
             
-            #mainPage #mainMenu480 { position: absolute; bottom: 5px; left: 0px; right: 0px; }
-            #mainPage #mainMenu320 { position: absolute; bottom: 5px; left: 0px; right: 0px; }
-            #mainPage [data-role="content"] a { background: rgba(255, 255, 255, .9); padding: 5px; }
+            #mainPage #mainMenu480 { position: absolute; bottom: 0px; left: 0px; right: 0px; }
+            #mainPage #mainMenu320 { position: absolute; bottom: 0px; left: 0px; right: 0px; }
+            #mainPage [data-role="content"] a { background: rgba(255, 255, 255, .83); margin: 5px 10px 5px 10px; }
             
             #forgotPasswordDialog .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             #forgotPasswordDialog div[data-role="content"] { height: auto !important; }
