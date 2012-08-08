@@ -5,16 +5,23 @@
         <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
     </div>
     <div data-role="content">
-        <ul data-role="listview" data-split-icon="gear" data-split-theme="d">
-            <li data-icon="arrow-r" data-theme="b">
-                <a href="searchLoads.html"><img src="images/06-magnify.png" class="ui-li-icon"/>Search for Loads</a>
-            </li>
-            <li data-icon="arrow-r" data-theme="b">
-                <a href="truckStops.html"><img src="images/47-fuel.png" class="ui-li-icon"/>Find Local Truck Stops</a>
-            </li>
-            <li data-icon="arrow-r" data-theme="b">
-                <a href="weather.html"><img src="images/25-weather.png" class="ui-li-icon"/>View Weather</a>
-            </li>
-        </ul>
+
+        <div id="mainMenu480" class="bg-turbo-truck-480">
+            <div class=ui-grid-a>
+              <div class=ui-block-a><a href="searchLoads.html" data-role="button" data-mini="true"><img src="images/06-magnify-small.png" style="float: left; padding-right: 5px;"/>Search for Loads</a></div>
+              <div class=ui-block-b><a href="truckStops.html" data-role="button" data-mini="true"><img src="images/47-fuel-small.png" style="float: left; padding-right: 5px;"/>Find Local Truck Stops</a></div>
+              <div class=ui-block-a><a href="weather.html" data-role="button" data-mini="true"><img src="images/25-weather-small.png" style="float: left; padding-right: 5px;"/>View Weather</a></div>
+            </div>
+        </div>
+
+        <div id="mainMenu320" class="bg-turbo-truck-320">
+            <div>
+              <a href="searchLoads.html" data-role="button" data-mini="true"><img src="images/06-magnify-small.png" style="float: left; padding-right: 5px;"/>Search for Loads</a>
+              <a href="truckStops.html" data-role="button" data-mini="true"><img src="images/47-fuel-small.png" style="float: left; padding-right: 5px;"/>Find Local Truck Stops</a>
+              <a href="weather.html" data-role="button" data-mini="true"><img src="images/25-weather-small.png" style="float: left; padding-right: 5px;"/>View Weather</a>
+            </div>
+        </div>
+
     </div>
+
 </div>

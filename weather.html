@@ -1,4 +1,4 @@
-﻿<div id="weatherPage" data-role="page" data-add-back-btn="true" data-back-btn-text="Back">
+﻿<div id="weatherPage" data-role="page" data-add-back-btn="true" data-back-btn-text="Back" class="ohl-bg-gradient">
 
     <div data-role="header">
         <h1>Local Weather</h1>
@@ -10,20 +10,71 @@
                 <fieldset id="currentWeatherFieldset">
                     <legend>Current Weather</legend>
                     <div id="currentWeatherFieldsetContainer">
-                        <div id="currentWeatherIcon">
-                            <img data-bind="attr: { src: icon }"></img>
-                        </div>
                         <table id="currentWeatherData">
                             <tr>
-                                <td id="currentWeatherDesc"><b>Description:</b> <span data-bind="text: description"></span></td>
-                                <td id="currentWeatherTemp"><b>Temperature:</b> <span data-bind="text: temperature"></span></td>
-                            </tr>
-                            <tr>
-                                <td id="currentWeatherWind"><b>Wind Speed:</b> <span data-bind="text: windSpeed"></span></td>
-                                <td id="currentWeatherWindDir"><b>Wind Direction:</b> <span data-bind="text: windDirection"></span></td>
+                                <td id="currentWeatherIcon"><img data-bind="attr: { src: icon }"></img></td>
+                                <td id="currentTemperature"><span data-bind="text: temperature() + '&deg;'"></span></td>
+                                <td>
+                                    <table>
+                                        <tr><td><span data-bind="text: description()"></span></td></tr>
+                                        <tr><td><span data-bind="text: 'Wind: ' + windDirection() + ' at ' + windSpeed() + ' MPH'"></span></td></tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </div>
+                </fieldset>
+                <fieldset id="currentWeatherFieldset320">
+                    <legend>Current Weather</legend>
+                    <div id="Div1">
+                        <table id="Table2">
+                            <tr>
+                                <td id="currentWeatherIcon320"><img data-bind="attr: { src: icon }"></img></td>
+                                <td id="currentTemperature320"><span data-bind="text: temperature() + '&deg;'"></span></td>
+                                <td><span data-bind="text: 'Wind: ' + windDirection() + ' at ' + windSpeed() + ' MPH'"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+                <fieldset id="fiveDayWeatherFieldset">
+                    <legend>5 Day Forecast</legend>
+                    <table>
+                        <tbody data-bind="foreach: futureDayForecast">
+                            <tr>
+                                <td>
+                                    <table id="futureForecastDate">
+                                        <tr><td><b><span data-bind="text: fcDayOfWeek"></span></b></td></tr>
+                                        <tr><td><span data-bind="text: fcAbbrFormatDate"></span></td></tr>
+                                    </table>
+                                <td><img data-bind="attr: { src: icon }"></img></td>
+                                <td id="futureForecastHigh" class="high-temperature"><span data-bind="text: maxTemperature + '&deg;'"></span></td>
+                                <td id="futureForecastLow" class="low-temperature"><span data-bind="text: minTemperature + '&deg;'"></span></td>
+                                <td>
+                                    <table id="Table1">
+                                        <tr><td><span data-bind="text: description"></span></td></tr>
+                                        <tr><td><span data-bind="text: 'Wind: ' + windDirection + ' at ' + windSpeed + ' MPH'"></span></td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+                <fieldset id="fiveDayWeatherFieldset320">
+                    <legend>5 Day Forecast</legend>
+                    <table>
+                        <tbody data-bind="foreach: futureDayForecast">
+                            <tr>
+                                <td>
+                                    <table id="Table3">
+                                        <tr><td><b><span data-bind="text: fcDayOfWeek"></span></b></td></tr>
+                                        <tr><td><span data-bind="text: fcAbbrFormatDate"></span></td></tr>
+                                    </table>
+                                <td><img data-bind="attr: { src: icon }"></img></td>
+                                <td id="futureForecastHigh320" class="high-temperature"><span data-bind="text: maxTemperature + '&deg;'"></span></td>
+                                <td id="futureForecastLow320" class="low-temperature"><span data-bind="text: minTemperature + '&deg;'"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </fieldset>
             </div>
         </div>

@@ -31,11 +31,42 @@ var geoLocationSuccess = function (position) {
     });
 };
 
+function getTruckStopsGeolocationSuccess(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+}
+
 // onError Callback receives a PositionError object
 //
-function geoLocationError(error) {
+function getTruckStopsLocationError(error) {
     alert('code: ' + error.code + '\n' +
           'message: ' + error.message + '\n');
+}
+
+function truckStopSelectChanged() {
+    var query = $("#truckStopSearchSelect").val();
+
+    $.ajax({
+        type: "GET",
+        url: ajaxBase + "Mobile/GetGooglePlaces",
+        crossDomain: true,
+        timeout: 2000,
+        data: { latitude: latitude, longitude: longitude, query: query, radius: 3000 },
+        dataType: "jsonp",
+        jsonpCallback: "truckStopSelectChangedSuccess",
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown + textStatus + jqXHR);
+            console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
+        }
+    });
+    return false;
+}
+
+function truckStopSelectChangedSuccess(data) {
+    searchResults.removeAll();
+    $.each(data.results, function (index, result) {
+        searchResults.push(new TruckStopResultsViewModel(result));
+    });
 }
 
 

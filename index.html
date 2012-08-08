@@ -19,7 +19,7 @@
 -->
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="viewport" content=" width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Cordova Authentication</title>
 
@@ -33,11 +33,16 @@
             var debugUsername = "tgrover@ohl.com";
             var debugPassword = "RW$}*uP>"
             var googleMapsIsReady = false;
+
+            var city = "unknown";
+            var state = "unknown";
+            var latitude = "unknown";
+            var longitude = "unknown";
         </script>
 
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/jquery/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="scripts/knockout/knockout-latest.js"></script>
+        <script type="text/javascript" charset="utf-8" src="scripts/knockout/knockout-2.1.0.js"></script>
         <script type="text/javascript" charset="utf-8" src="scripts/knockout/knockout.mapping.js"></script>
 
         <script type="text/javascript" charset="utf-8" src="scripts/ohl/authentication.js"></script>
@@ -56,25 +61,68 @@
 
         <style type="text/css">
 
-            @media only screen and (min-width: 1025px){
-                .ui-page {
-                    width: 600px !important;
+            @media only screen and (min-width: 1px){
+                .ui-page 
+                {
+                    width: 320px !important;
                     margin: 0 auto !important;
                     position: relative !important;
                     border-right: 5px #666 outset !important;
                     border-left: 5px #666 outset !important;
                 }
+                #weatherPage #currentWeatherFieldset { display: none; }
+                #weatherPage #fiveDayWeatherFieldset { display: none; }
+                #weatherPage #currentWeatherFieldset320 { display: block; }
+                #weatherPage #fiveDayWeatherFieldset320 { display: block; }
+                
+                #mainPage #mainMenu480 { display: none; }
+                #mainPage #mainMenu320 { display: block; }
+                #mainPage
+                {
+                    background-image:url('images/Turbo_Truck_320.jpg'); 
+                    background-repeat:no-repeat;
+                    background-attachment:fixed;
+                    background-position: top;
+                }
+                
+                #truckStopsPage #truckStopSearchResult td.search-description { display: none; }
             }
             
-            .ohl-bg-gradient {
-                background: -ms-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
-                background: -moz-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
-                background: -o-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
-                background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #ACD6FF));
-                background: -webkit-linear-gradient(bottom, #FFFFFF 0%, #ACD6FF 100%);
-                background: linear-gradient(to top, #FFFFFF 0%, #ACD6FF 100%);
+            @media only screen and (min-width: 480px){
+                .ui-page 
+                {
+                    width: 480px !important;
+                    margin: 0 auto !important;
+                    position: relative !important;
+                    border-right: 5px #666 outset !important;
+                    border-left: 5px #666 outset !important;
+                }
+                #weatherPage #currentWeatherFieldset320 { display: none; }
+                #weatherPage #fiveDayWeatherFieldset320 { display: none; }
+                #weatherPage #currentWeatherFieldset { display: block; }
+                #weatherPage #fiveDayWeatherFieldset { display: block; }
+                
+                #mainPage #mainMenu480 { display: block; }
+                #mainPage #mainMenu320 { display: none; }
+                #mainPage
+                {
+                    background-image:url('images/Turbo_Truck_480.jpg'); 
+                    background-repeat:no-repeat;
+                    background-attachment:fixed;
+                    background-position:center;
+                }
+                
+                #truckStopsPage #truckStopSearchResult td.search-description { display: block; }
             }
 
+            .ohl-bg-gradient {
+                background: -ms-linear-gradient(bottom, #ACD6FF 0%, #FFFFFF 100%);
+                background: -moz-linear-gradient(bottom, #ACD6FF 0%, #FFFFFF 100%);
+                background: -o-linear-gradient(bottom, #FFFACD6FFFFF 0%, #FFFFFF 100%);
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ACD6FF), color-stop(1, #FFFFFF));
+                background: -webkit-linear-gradient(bottom, #ACD6FF 0%, #FFFFFF 100%);
+                background: linear-gradient(to top, #ACD6FF 0%, #FFFFFF 100%);
+            }
             
             .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             p.app-title { font: interstate; text-align: center; font-weight: bold; font-size: x-large; padding: 0px; margin: 5px; }
@@ -88,6 +136,10 @@
             #loginPage #register-new-account { float: right; font-size: small; padding-right: 5px; }
             #loginPage [data-role="footer"] { position: absolute; bottom: 0px; width: 100%; text-align: center; }
             
+            #mainPage #mainMenu480 { position: absolute; bottom: 5px; left: 0px; right: 0px; }
+            #mainPage #mainMenu320 { position: absolute; bottom: 5px; left: 0px; right: 0px; }
+            #mainPage [data-role="content"] a { background: rgba(255, 255, 255, .9); padding: 5px; }
+            
             #forgotPasswordDialog .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
             #forgotPasswordDialog div[data-role="content"] { height: auto !important; }
             #forgotPasswordDialog div.forgot-password-text { padding-bottom: 15px; }
@@ -95,15 +147,34 @@
             #forgotPasswordDialog div.ui-block-b { width: auto; }
             #forgotPasswordDialog div.ui-block-c { margin-right: 10px; position: relative; float: right; }
             #forgotPasswordDialog .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; position: relative; top: -15px; }
-            
-            #mainPage div.ohl-list-item { display: inline; }
-            
+
             #weatherPage .weather-data-container { display: none; }
-            #weatherPage #currentWeatherFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
+            #weatherPage #currentWeatherFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; margin-bottom: 10px; }
             #weatherPage #currentWeatherFieldsetContainer { position: relative; }
             #weatherPage #currentWeatherIcon { float: left; padding: 10px 10px 10px 10px; }
             #weatherPage #currentWeatherData { float: left;  }
             #weatherPage #currentWeatherData td { padding: 5px 5px 5px 5px; }
+            #weatherPage #fiveDayWeatherFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
+            #weatherPage #futureForecastDate td { text-align: center; }
+            #weatherPage #futureForecastHigh { font-size: xx-large; font-weight: bolder; vertical-align: bottom; padding-left: 5px; padding-bottom: 7px; }
+            #weatherPage #futureForecastLow { font-weight: bold; padding: 5px; vertical-align: bottom; padding-bottom: 9px; padding-right: 10px;}
+            #weatherPage #currentTemperature { font-size: xx-large; font-weight: bolder; padding-left: 5px; padding-bottom: 7px; }
+            
+            #weatherPage #currentWeatherFieldset320 { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; margin-bottom: 10px; }
+            #weatherPage #fiveDayWeatherFieldset320 { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; }
+            #weatherPage #currentWeatherIcon320 { float: left; padding: 10px 10px 10px 10px; }
+            #weatherPage #currentTemperature320 { font-size: xx-large; font-weight: bolder; padding-left: 5px; padding-bottom: 7px; }
+            #weatherPage #futureForecastDate320 td { text-align: center; }
+            #weatherPage #futureForecastHigh320 { font-size: xx-large; font-weight: bolder; vertical-align: bottom; padding-left: 5px; padding-bottom: 7px; }
+            #weatherPage #futureForecastLow320 { font-weight: bold; padding: 5px; vertical-align: bottom; padding-bottom: 9px; padding-right: 10px;}
+            
+            #truckStopsPage #truckStopsSearchButton { font-weight: bold; font-size: smaller; padding-left: 7px; position: absolute; bottom: 1px; }
+            #truckStopsPage #truckStopsSearchButton:link    { color:blue; text-decoration:none; }
+            #truckStopsPage #truckStopsSearchButton:visited { color:blue; text-decoration:none; }
+            #truckStopsPage #truckStopsSearchButton:hover   { color:green; text-decoration:underline; }
+            #truckStopsPage #truckStopsSearchButton:active  { color:blue; text-decoration:none; }
+            #truckStopsPage #searchResultFieldset { padding-left: 20px; padding-right: 20px; padding-bottom: 10px; border: solid 1px black; border-radius: 5px; margin-bottom: 10px; }
+            #truckStopsPage #truckStopSearchSelect option { text-align: center; font-weight: bold; font-size: medium; }
             
         </style>
 

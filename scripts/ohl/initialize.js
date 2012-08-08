@@ -22,10 +22,49 @@ function fixgeometry() {
     content.height(content_height);
 }; /* fixgeometry */
 
+function getCityState(position, successFunction) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    $.ajax({
+        type: "GET",
+        url: ajaxBase + "Mobile/GetCityState",
+        crossDomain: true,
+        timeout: 2000,
+        data: { latitude: latitude, longitude: longitude },
+        dataType: "jsonp",
+        jsonpCallback: successFunction,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown + textStatus + jqXHR);
+            console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
+        }
+    });
+    return false;
+}
+
+function getCityStateError() {
+    console.log("City State Error");
+}
+
+function updateCityState(data) {
+    $.each(data.results, function (index, result) {
+        if (result.types[0] == "locality") {
+            $.each(result.address_components, function (index2, result2) {
+                if (result2.types[0] == "locality") {
+                    city = result2.long_name;
+                } else if (result2.types[0] == "administrative_area_level_1") {
+                    state = result2.short_name;
+                }
+            });
+        }
+    });
+}
+
 
 $(document).on('pageinit', function (event) {
     $.mobile.allowCrossDomainPages = true;
     $.support.cors = true;
+    $.mobile.selectmenu.prototype.options.nativeMenu = false;
 
     var activePage = $(event.target);
     var pageName = getPageName(activePage.attr('data-url'));
@@ -55,15 +94,19 @@ $(document).on('pageinit', function (event) {
             //console.log("initializing main page");
             $("#mainPage .ohl-logout-button").click(authLogout);
             $("#mainPage #testLoadsButton").click(loadsGetTestLoads);
+            //$('#mainPage a').transify({ opacityOrig: .3, opacityNew: .7, fadeSpeed: 200 });
             break;
         case "truckStopsPage":
         case "truckStops.html":
             //console.log("initializing truck stops page");
+            $('#truckStopSearchSelect').change(truckStopSelectChanged);
+            ko.applyBindings({ truckStopResults: searchResults });
             $("#truckStopsPage .ohl-logout-button").click(authLogout);
             break;
         case "weatherPage":
         case "weather.html":
             //console.log("initializing truck stops page");
+            
             $("#weatherPage .ohl-logout-button").click(authLogout);
             break;
         default:
@@ -94,29 +137,7 @@ $(document).on("pageshow", function () {
         case "truckStopsPage":
         case "truckStops.html":
             //console.log("showing truck stops page");
-            //navigator.geolocation.getCurrentPosition(geoLocationSuccess, geoLocationError, { enableHighAccuracy: true });
-            var o = { 'center': '36.3047, -86.62', 'zoom': 13, 'streetViewControl': false, 'zoomControl': true, 'panControl': true, 'mapTypeControl': false, 'mapTypeId': 'terrain' };
-            $('#map_canvas').gmap(o).bind('init', function (event, map) {
-                $('#map_canvas').gmap('addControl', 'control', 1);
-                $('#map_canvas').gmap('autocomplete', 'places', function (ui) {
-                    $('#map_canvas').gmap('clear', 'markers');
-                    $('#map_canvas').gmap('set', 'bounds', null);
-                    $.mobile.pageLoading();
-                    $('#map_canvas').gmap('placesSearch', { 'location': ui.item.position, 'radius': '5000'/*, 'name': ['store']*/ }, function (results, status) {
-                        if (status === 'OK') {
-                            $.each(results, function (i, item) {
-                                var content = '<div class="places-img"><img src="' + item.icon + '"/></div><div class="places-text"><h3>' + item.name + '</h3></div><div class="clear"></div>';
-                                $('#map_canvas').gmap('addMarker', { 'id': item.id, /*'icon': item.icon,*/'position': item.geometry.location, 'bounds': true }).click(function () {
-                                    $('#map_canvas').gmap('openInfoWindow', { 'content': content }, this);
-                                });
-                            });
-                        }
-                        $.mobile.pageLoading(true);
-                    });
-                });
-                $('#control').show();
-            });
-
+            navigator.geolocation.getCurrentPosition(getTruckStopsGeolocationSuccess, getTruckStopsLocationError);
             var defaultValue = $('#places').val();
             $('#places').focus(function () {
                 if ($(this).val() === defaultValue) {
@@ -132,6 +153,8 @@ $(document).on("pageshow", function () {
         case "weatherPage":
         case "weather.html":
             //console.log("initializing truck stops page");
+            $("#currentWeatherFieldset legend").html("Current Forecast");
+            $("#currentWeatherFieldset320 legend").html("Current Forecast");
             navigator.geolocation.getCurrentPosition(getWeatherGeoLocationSuccess, getWeatherGeoLocationError);
             $("#weatherPage .ohl-logout-button").click(authLogout);
             break;

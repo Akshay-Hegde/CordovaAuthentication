@@ -42,8 +42,8 @@ function authHandleLogin() {
 
 function authLoginSuccess(data) {
     if (data.success == "true") {
-//        window.localStorage.setItem("username", data.username);
-//        window.localStorage.setItem("password", data.password);
+        //        window.localStorage.setItem("username", data.username);
+        //        window.localStorage.setItem("password", data.password);
         mainResetPage();
         $.mobile.changePage("main.html");
     } else {
@@ -78,3 +78,5 @@ function authReturnToLogonScreen() {
     $("#password").val('');
     $.mobile.changePage("index.html");
 }
+
+

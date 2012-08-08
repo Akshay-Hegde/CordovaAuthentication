@@ -1,17 +1,41 @@
-﻿<div id="truckStopsPage" data-role="page" data-add-back-btn="true" data-back-btn-text="Back">
+﻿<div id="truckStopsPage" data-role="page" data-add-back-btn="true" data-back-btn-text="Back" class="ohl-bg-gradient">
 
     <div data-role="header">
         <h1>Truck Stops</h1>
         <a data-role="button" data-mini="true" class="ui-btn-right ohl-logout-button">Logout</a>
     </div>
     <div data-role="content">
-        <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-			<div id="map_canvas" style="height:350px;"></div>
-            <div id="control">
+        <div data-inline="true" style="position: relative;">
+            <form>
                 <div>
-                    <input id="places" class="ui-bar-c" type="text" value="Search places..." />
+                    <select id="truckStopSearchSelect">
+                        <option value="" style="display:none;">Select Search...</option>
+	                    <option value="truck stops">Truck Stops</option>
+                        <option value="hotels">Gas Stations</option>
+                        <option value="restaurants">Restaurants</option>
+	                    <option value="fast food">Fast Food</option>
+	                    <option value="hotels">Hotels</option>
+                    </select>
                 </div>
-            </div>
-		</div>
+            </form>
+        </div>
+        <div id="truckStopSearchResult">
+            <!--<fieldset id="searchResultFieldset">-->
+                <!--<legend>Results</legend>-->
+                <table>
+                    <tbody data-bind="foreach: truckStopResults">
+                        <tr>
+                            <td><img data-bind="attr: { src: icon }"></img></td>
+                            <td>
+                                <table id="Table1">
+                                    <tr><td><b><span data-bind="text: name"></span></b></td></tr>
+                                    <tr><td class="search-description"><span data-bind="text: address"></span></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+           <!-- </fieldset>-->
+        </div>
     </div>
 </div>
