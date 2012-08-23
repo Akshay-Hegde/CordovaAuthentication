@@ -15,30 +15,35 @@ function authCheckPreAuth() {
 }
 
 function authHandleLogin() {
-    var form = $("#loginForm");
-    $("#submitButton", form).attr("disabled", "disabled");
-    var u = $("#username", form).val();
-    var p = $("#password", form).val();
-    if (u != '' && p != '') {
-        $.ajax({
-            type: "GET",
-            url: ajaxBase + "Account/CordovaLogOn",
-            crossDomain: true,
-            timeout: 5000,
-            data: { username: u, password: p },
-            dataType: "jsonp",
-            jsonpCallback: "authLoginSuccess",
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown + textStatus + jqXHR);
-                console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
-            }
-        });
-    } else {
-        console.log("userid or password is null"); 
-    }
-    $("#submitButton").removeAttr("disabled");
-    return false;
+	mainResetPage();
+	$.mobile.changePage("main.html");
 }
+
+// function authHandleLogin() {
+    // var form = $("#loginForm");
+    // $("#submitButton", form).attr("disabled", "disabled");
+    // var u = $("#username", form).val();
+    // var p = $("#password", form).val();
+    // if (u != '' && p != '') {
+        // $.ajax({
+            // type: "GET",
+            // url: ajaxBase + "Account/CordovaLogOn",
+            // crossDomain: true,
+            // timeout: 5000,
+            // data: { username: u, password: p },
+            // dataType: "jsonp",
+            // jsonpCallback: "authLoginSuccess",
+            // error: function (jqXHR, textStatus, errorThrown) {
+                // alert(errorThrown + textStatus + jqXHR);
+                // console.log("login failure: " + errorThrown + textStatus + jqXHR.getAllResponseHeaders());
+            // }
+        // });
+    // } else {
+        // console.log("userid or password is null"); 
+    // }
+    // $("#submitButton").removeAttr("disabled");
+    // return false;
+// }
 
 function authLoginSuccess(data) {
     if (data.success == "true") {
