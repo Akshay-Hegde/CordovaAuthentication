@@ -1,7 +1,8 @@
 function WeatherDayViewModel(weather) {
     var self = this;
 
-    self.icon = weather.weatherIconUrl[0].value;
+    //self.icon = weather.weatherIconUrl[0].value;
+	self.icon = "images/weather/" + getFilename(weather.weatherIconUrl[0].value);
     self.description = weather.weatherDesc[0].value;
     self.minTemperature = weather.tempMinF;
     self.maxTemperature = weather.tempMaxF;
@@ -27,7 +28,8 @@ function WeatherViewModel(responseData) {
     };
 
     self.populateData = function (responseData) {
-        self.icon(responseData.data.current_condition[0].weatherIconUrl[0].value);
+        //self.icon(responseData.data.current_condition[0].weatherIconUrl[0].value);
+		self.icon = "images/weather/" + getFilename(responseData.data.current_condition[0].weatherIconUrl[0].value);
         self.description(responseData.data.current_condition[0].weatherDesc[0].value);
         self.temperature(responseData.data.current_condition[0].temp_F);
         self.windSpeed(responseData.data.current_condition[0].windspeedMiles);
@@ -98,6 +100,11 @@ function getAbbrMonth(date) {
         case 10: return "Nov";
         case 11: return "Dec";
     }
+}
+
+function getFilename(url) {
+    var position = url.lastIndexOf("/");
+	return url.substring(position);
 }
 
 var myWeatherViewModel = new WeatherViewModel();

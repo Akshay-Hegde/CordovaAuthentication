@@ -32,7 +32,7 @@ function weatherDataSuccess(responseData) {
     myWeatherViewModel.populateData(responseData);
     console.log("forecast days: " + myWeatherViewModel.futureDayForecast().length);
     ko.applyBindings(myWeatherViewModel, document.getElementById('weatherPage'));
-    $("#weatherPage .weather-data-container").fadeIn(1500);
+    $("#weatherPage .weather-data-container").fadeIn(500);
 }
 
 function weatherGetCityStateSuccess(data) {
